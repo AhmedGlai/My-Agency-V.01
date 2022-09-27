@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4" style="margin-left: -380px;width: 100%">
+        <div class="row">
+            <div class="col-md-8">
+
+
+            </div>
+            <div class="col-md-4 text-center" style="background-color: #5eb5e0">
+                <h1>{{ property.title }}</h1>
+                <h2>{{ property.rooms }} Pieces -- {{ property.surface }}m²</h2>
+                <div class="text-primary" style="font-size: 2rem;font-weight: bold">{{ property.formattedPrice }}$</div>
+                <br><a href="#" class="btn btn-primary">Contact Agency</a>
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-center" style="margin-right: 190px">Characteristics</h2><br>
+            <table style="margin: -10px 10px 10px 450px" class="table table-striped">
+
+                <tr>
+                    <td>Surface Area</td>
+                    <td>{{ property.surface }}m²</td>
+                </tr>
+                <tr>
+                    <td>Pieces</td>
+                    <td>{{ property.rooms }}</td>
+                </tr>
+                <tr>
+                    <td>Bedrooms</td>
+                    <td>{{ property.bedrooms }}</td>
+                </tr>
+                <tr>
+                    <td>Floors</td>
+                    <td>{{ property.floors }}</td>
+                </tr>
+                <tr>
+                    <td>Air Conditioning</td>
+                    <td>{{ property.heatType }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h4 class="text-center" style="margin-right: -600px;color: #dc3545">Specification</h4>
+            <h5 class="text-center" style="margin-right: -620px;color: royalblue">{{ property.description|nl2br }}</h5><br>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+PRODUCTS
+{% endblock %}
+
