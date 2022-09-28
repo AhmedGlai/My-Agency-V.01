@@ -23,7 +23,10 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #ffcc00;list-style: none" aria-current="page"{% if current_menu is defined and current_menu == 'property' %}active{% endif %}  href="{{path('product.index')}}">STORE</a>
+                        <a class="nav-link" style="color: #000000;list-style: none" aria-current="page"{% if current_menu is defined and current_menu == 'property' %}active{% endif %}  href="{{path('product.index')}}">STORE</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" style="color: #000000;list-style: none" href="{{path('admin.property.index')}}">ADMIN</a>
                     </li>
 
                 </ul>
