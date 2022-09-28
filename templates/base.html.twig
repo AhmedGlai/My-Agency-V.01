@@ -32,6 +32,13 @@
                 </ul>
             </div>
         </div>
+        {% if app.user %}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="{{ path('login')}}" class="nav-link">LOGOUT</a>
+                </li>
+            </ul>
+        {% endif %}
     </nav>
         {% block body %}
         {% endblock %}
