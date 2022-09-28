@@ -1,10 +1,15 @@
-{% extends 'base.html.twig' %}
+<div class="card mb-2">
+    <div class="card-body"1>
+        <h5 class="card-title">
+            <a href="{{ path('property.show', {slug: prop.slug, id:prop.id}) }}">
+                {{ prop.title }}
+            </a>
+        </h5>
+        <p class="card-text">{{ prop.surface }}m² {{ prop.city }} {{ prop.postalCode }}</p>
+        <div class="text-primary" style="font-size: 2rem;font-weight: bold;">
+            {{ prop.price|number_format(0,'',' ') }}$
+        </div>
 
-{% block title %}
-
-{% endblock %}
-
-{% block body %}
-
-{% endblock %}
+    </div>
+</div>
 

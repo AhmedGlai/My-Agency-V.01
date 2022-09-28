@@ -8,4 +8,38 @@
         <h1>OUR STORE</h1>
         <h5>Best Offers in The Market</h5>
     </div>
+    <br>
+    <div class="jumbotron" style="font-family: 'Bahnschrift',Serif,serif">
+        <div class="container" style="width: 30%;margin-left:0 ">
+            <h4>Do you want help?</h4>
+            <span>SEARCH IN HERE!</span>
+            {{ form_start(form) }}
+            <div class="form-row align-items-end">
+                <div class="col">
+                    {{ form_row(form.minSurface)}}
+                </div>
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.options) }}
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary">SEARCH</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        {% for prop in property %}
+            <div class="col-md-4">{% include 'property/_property.html.twig' %}</div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {{ knp_pagination_render(property) }}
+    </div>
+
 {% endblock %}
