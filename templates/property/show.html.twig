@@ -3,15 +3,50 @@
 {% block body %}
     <div class="container mt-4" style="margin-left: -380px;width: 100%">
         <div class="row">
+
             <div class="col-md-8">
 
-
             </div>
+
             <div class="col-md-4 text-center" style="background-color: #5eb5e0">
+                {% for msg in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ msg }}
+                    </div>
+                {% endfor %}
+                {% if not form.vars.valid %}
+                    <div class="alert alert-danger">
+                        Error
+                    </div>
+                {% endif %}
                 <h1>{{ property.title }}</h1>
                 <h2>{{ property.rooms }} Pieces -- {{ property.surface }}m²</h2>
                 <div class="text-primary" style="font-size: 2rem;font-weight: bold">{{ property.formattedPrice }}$</div>
                 <br><a href="#" class="btn btn-primary">Contact Agency</a>
+                <div id="contactForm" class="mt-4">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(form.firstname) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(form.lastname) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(form.phone) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(form.email) }}
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <button class="btn btn-primary">SEND</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
 
