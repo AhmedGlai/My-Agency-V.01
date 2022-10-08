@@ -1,6 +1,10 @@
 <div class="card mb-2">
-    <div class="card-body"1>
+
+    <div class="card-body">
         <h5 class="card-title">
+            {% if prop.filename %}
+                <img src="{{ vich_uploader_asset(prop, 'imageFile')|imagine_filter('thumb') }}" alt="card-img-top" width=100%>
+            {% endif %}
             <a href="{{ path('property.show', {slug: prop.slug, id:prop.id}) }}">
                 {{ prop.title }}
             </a>

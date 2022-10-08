@@ -8,12 +8,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
  * @UniqueEntity("title")
+ * @Vich\Uploadable()
  */
 class Property
 {
@@ -22,12 +25,27 @@ class Property
         1=>'Gaz'
     ];
 
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Assert\Image(mimeTypes="image/jpeg")
+     * @Vich\UploadableField(mapping="property", fileNameProperty="filename")
+     */
+    private $imageFile;
+
 
     /**
      * @Assert\Length(min=5,max=50)
@@ -105,6 +123,18 @@ class Property
      * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="properties")
      */
     private $options;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var int|null
+     */
+    private $imageSize;
 
     public function __construct()
     {
@@ -320,4 +350,77 @@ class Property
 
         return $this;
     }
+
+    /**
+     * @return File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     * @return Property
+     */
+    public function setImageFile(File $imageFile): Property
+    {
+        $this->imageFile=$imageFile;
+
+        if($this->imageFile instanceof UploadedFile)
+        {
+            $this->updated_at=new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string|null $filename
+     * @return Property
+     */
+    public function setFilename(string $filename=null): Property
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTime $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    /**
+     * @param int|null $imageSize
+     * @return Property
+     */
+    public function setImageSize(?int $imageSize): Property
+    {
+        $this->imageSize = $imageSize;
+        return $this;
+    }
+
+
 }
